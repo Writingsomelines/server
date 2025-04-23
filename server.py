@@ -74,4 +74,4 @@ def get_data():
     }), 200
 
 if __name__ == '__main__':
-    app.run(host='100.85.122.188', port=5000, debug=True)
+    app.run(host='100.87.154.176', port=5000, debug=True)
