@@ -3,7 +3,12 @@ import os
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
+import requests
 
+webhook_url = 'https://discord.com/api/webhooks/1365730256811724830/0tE6KGPL2M0KRAOtOFsNrX7JUvW-Q7HLBt6YQxA907tK2JRtKKsDlLDD5EwO9p5ILAod'
+data = {
+    "content": "O servidor está online"
+}
 UPLOAD_FOLDER = './uploads'
 MODEL_PATH = 'model.tflite'  # Changed model name to "model"
 
@@ -74,5 +79,10 @@ def get_data():
     }), 200
 
 if __name__ == '__main__':
+    if os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
+        try:
+            requests.post(webhook_url, json=data)
+        except:
+            pass
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
