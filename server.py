@@ -82,7 +82,7 @@ if __name__ == '__main__':
     if os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
         try:
             requests.post(webhook_url, json=data)
-        except:
-            pass
+        except Exception as e:
+            print(f"Erro ao enviar o webhook para o Discord: {e}")
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
